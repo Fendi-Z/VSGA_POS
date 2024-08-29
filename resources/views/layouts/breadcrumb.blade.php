@@ -10,7 +10,13 @@
             @if ($key == count($breadcrumb->list) - 1)
               <li class="breadcrumb-item active">{{ $value }}</li>
             @else
-              <li class="breadcrumb-item"><a href="#">{{ $value }}</a></li>
+              <li class="breadcrumb-item">
+                @if (strtolower($value) == 'home')
+                  <a href="{{ url('/') }}">{{ $value }}</a>
+                @else
+                  <a href="{{ strtolower(url("$value")) }}">{{ $value }}</a>
+                @endif
+              </li>
             @endif
           @endforeach
         </ol>
