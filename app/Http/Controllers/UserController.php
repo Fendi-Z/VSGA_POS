@@ -20,18 +20,24 @@ class UserController extends Controller
             'title' => 'Daftar User yang terdaftar dalam sistem'
         ];
 
-        return view('user.index', ['breadcrumb' => $breadcrumb, 'page' => $page]);
+        $level = LevelModel::all();
+
+        return view('user.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'level' => $level]);
     }
 
     public function list(Request $request)
     {
         $users = UserModel::select('user_id', 'username', 'nama', 'level_id')->with('level');
 
+        if ($request->level_id) {
+            $users->where('level_id', $request->level_id);
+        }
+        
         return DataTables::of($users)->addIndexColumn()->addColumn('aksi', function ($user) {  
-            $btn = '<a href="'.url('/user/' . $user->user_id). '" class="btn btn-info btn-sm">Detail</a>';
-            $btn .= '<a href="'.url('/user/' . $user->user_id . '/edit') . '"class="btn btn-warning btn-sm">Edit</a>';
+            $btn = '<a href="'.url('/user/' . $user->user_id). '" class="btn btn-info btn-sm mx-1">Detail</a>';
+            $btn .= '<a href="'.url('/user/' . $user->user_id . '/edit') . '"class="btn btn-warning btn-sm  mx-1">Edit</a>';
             $btn .= '<form class="d-inline-block" method="POST" action="' . url('/user/'.$user->user_id).'">' . csrf_field() . method_field('DELETE') . 
-                        '<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Apakah Anda yakin menghapus data ini ?\');">Hapus</button>
+                        '<button type="submit" class="btn btn-danger btn-sm mx-1" onclick="return confirm(\'Apakah Anda yakin menghapus data ini ?\');">Hapus</button>
                     </form>';
             return $btn;
         })->rawColumns(['aksi'])->make(true);
@@ -82,7 +88,7 @@ class UserController extends Controller
         ];
 
         $page = (object) [
-            'title' => 'Tambah User Baru'
+            'title' => 'Detail User'
         ];
 
         return view('user.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'user' => $user]);

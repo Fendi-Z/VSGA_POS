@@ -22,7 +22,7 @@
         </li>
         <li class="nav-header">Data Pengguna</li>
         <li class="nav-item">
-          <a href="{{ url('/level') }}" class="nav-link {{ Request::is('level') ? 'active' : '' }}">
+          <a href="{{ url('/level') }}" class="nav-link {{ Request::is('level*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-layer-group"></i>
             <p>Level User</p>
           </a>
@@ -35,28 +35,34 @@
         </li>
         <li class="nav-header">Data Barang</li>
         <li class="nav-item">
-          <a href="{{ url('/kateogri') }}" class="nav-link {{ Request::is('kateogri') ? 'active' : '' }}">
+          <a href="{{ url('/kategori') }}" class="nav-link {{ Request::is('kategori*') ? 'active' : '' }}">
             <i class="nav-icon far fa-bookmark"></i>
             <p>Kategori Barang</p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ url('/barang') }}" class="nav-link {{ Request::is('barang') ? 'active' : '' }}">
+          <a href="{{ url('/barang') }}" class="nav-link {{ Request::is('barang*') ? 'active' : '' }}">
             <i class="nav-icon far fa-list-alt"></i>
             <p>Data Barang</p>
           </a>
         </li>
         <li class="nav-header">Data Transaksi</li>
         <li class="nav-item">
-          <a href="{{ url('/stok') }}" class="nav-link {{ Request::is('stok') ? 'active' : '' }}">
+          <a href="{{ url('/stok') }}" class="nav-link {{ Request::is('stok*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-cubes"></i>
             <p>Stok Barang</p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ url('/penjualan') }}" class="nav-link {{ Request::is('penjualan') ? 'active' : '' }}">
+          <a href="{{ url('/penjualan') }}" class="nav-link {{ Request::is('penjualan*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-cash-register"></i>
             <p>Transaksi Penjualan</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ url('/penjualan_detail') }}" class="nav-link {{ Request::is('penjualan_detail*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-chart-bar"></i>
+            <p>Detail Penjualan</p>
           </a>
         </li>
       </ul>
